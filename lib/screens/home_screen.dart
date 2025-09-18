@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../core/app-constain.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -20,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
             width: MediaQuery.of(context).size.width,
             height: 300,
             child: Image.asset(
-              "assests/images/thumbnail9.jpg",
+              "${AppConstain.thumbnail}",
               fit: BoxFit.cover,
             ),
           ),
@@ -65,8 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Container(
                         padding: EdgeInsets.only(left: 20),
                         width: MediaQuery.of(context).size.width,
-                        height: 160,
-                        // color: Colors.blue,
+                        height: 180,
                         child: ListView.separated(
                           separatorBuilder: (context, index) {
                             return SizedBox(width: 10);
@@ -84,20 +85,27 @@ class _HomeScreenState extends State<HomeScreen> {
                                     borderRadius: BorderRadius.circular(25),
                                     image: DecorationImage(
                                       image: AssetImage(
-                                        "assests/images/thumbnail9.jpg",
+                                        "${AppConstain.imgs[index]}",
                                       ),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 8,),
+                                SizedBox(height: 8),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 7),
-                                  child: Text(
-                                    "texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext$index",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                                  child: Expanded(
+                                    child: SizedBox(
+                                      width:120,
+                                      child: Text(
+                                        "${AppConstain.quotes[index]}",
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
