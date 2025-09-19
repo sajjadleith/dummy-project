@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/core/widgets/sperated-list.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../core/app-constain.dart';
+import '../core/widgets/custom-cart.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,13 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
         textDirection: TextDirection.ltr,
         children: [
           // Image
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 300,
-            child: Image.asset(
-              "${AppConstain.thumbnail}",
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset(AppConstain.thumbnail, fit: BoxFit.cover),
           ),
           // Text on the image
           Container(
@@ -63,58 +63,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
+                    SperatedList(),
                     SliverToBoxAdapter(
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20),
-                        width: MediaQuery.of(context).size.width,
-                        height: 180,
-                        child: ListView.separated(
-                          separatorBuilder: (context, index) {
-                            return SizedBox(width: 10);
-                          },
-                          itemCount: 5,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: 120,
-                                  height: 120,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(25),
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        "${AppConstain.imgs[index]}",
-                                      ),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 7),
-                                  child: Expanded(
-                                    child: SizedBox(
-                                      width:120,
-                                      child: Text(
-                                        "${AppConstain.quotes[index]}",
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          left: 30,
+                          right: 30,
+                          top: 30,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Rekomendasi",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            Text(
+                              "Lihat Lebih",
+                              style: TextStyle(color: Colors.blueAccent),
+                            ),
+                          ],
                         ),
                       ),
                     ),
+                    CustomCart(title: 'Meditasi Dasar 2', desc: '2 Menit . Singkart', img: '${AppConstain.imgs[0]}',),
+                    CustomCart(title: 'Stress bukan segaadfdfdf', desc: '4 Menit . Sedang', img: '${AppConstain.imgs[1]}',),
                   ],
                 ),
               ),

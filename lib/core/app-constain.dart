@@ -7,4 +7,5 @@ class AppConstain {
   static String env5 = "assests/images/env5.jpg";
   static List imgs = [env1, env2, env3, env4, env5];
   static List quotes = ["Hello Ali Sabbar sldjfldsjflj", "What's good brother dsfsjfljsdf", "Something to say weeeeeeeeeeeeeeee", "How long please to send this message", "Finally finished the quote wooooo yeaaaaah"];
+  static String play = "assests/images/play.svg";
 }
