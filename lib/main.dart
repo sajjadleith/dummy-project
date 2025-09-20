@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/screens/dummy_screen.dart';
 import 'package:music_app/screens/home_screen.dart';
+
+import 'core/widgets/custom_navBar.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+  List<Widget> screens = [HomeScreen(), DummyScreen()];
+  int currentIndex = 0;
+  onChange(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +34,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: Scaffold(
-        body: HomeScreen(),
+        backgroundColor: Colors.grey[300],
+        body: screens[currentIndex],
+        bottomNavigationBar: CustomNavbar(
+          currentIndex: currentIndex,
+          onChange: onChange,
+        ),
       ),
     );
   }

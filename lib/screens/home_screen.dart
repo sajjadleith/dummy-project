@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/core/widgets/sperated-list.dart';
-import 'package:flutter_svg/svg.dart';
-
 import '../core/app-constain.dart';
-import '../core/widgets/custom-cart.dart';
+import '../core/widgets/custom-card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -46,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.grey[300],
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(30)),
                 ),
                 child: CustomScrollView(
