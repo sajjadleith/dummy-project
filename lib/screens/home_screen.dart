@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/core/widgets/sperated-list.dart';
+import 'package:music_app/screens/music_screen.dart';
 import '../core/app-constain.dart';
 import '../core/widgets/custom-card.dart';
 
@@ -11,6 +12,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  onTap() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MusicScreen()));
+  }
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -88,8 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    CustomCart(title: 'Meditasi Dasar 2', desc: '2 Menit . Singkart', img: '${AppConstain.imgs[0]}',),
-                    CustomCart(title: 'Stress bukan segaadfdfdf', desc: '4 Menit . Sedang', img: '${AppConstain.imgs[1]}',),
+                    SliverToBoxAdapter(child: CustomCart(title: 'Meditasi Dasar 2', desc: '2 Menit . Singkart', img: '${AppConstain.imgs[0]}', onTap: () => onTap,)),
+                    SliverToBoxAdapter(child: CustomCart(title: 'Stress bukan segaadfdfdf', desc: '4 Menit . Sedang', img: '${AppConstain.imgs[1]}', onTap: () {},)),
                   ],
                 ),
               ),

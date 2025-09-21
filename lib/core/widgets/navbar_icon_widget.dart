@@ -12,7 +12,6 @@ class NavbarIconWidget extends StatelessWidget {
       width: 30,
       height: MediaQuery.sizeOf(context).height,
       decoration: BoxDecoration(
-        // color: Colors.red, Color(0xff5203fc)
         border: Border(
           top: BorderSide(color: color, width: 4),
         ),

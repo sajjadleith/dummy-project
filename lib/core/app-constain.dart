@@ -12,4 +12,7 @@ class AppConstain {
   static String cal = "assests/images/calender.svg";
   static String chat = "assests/images/chat.svg";
   static String profile = "assests/images/profile.svg";
+  static String backArrow = "assests/images/back_arrow.svg";
+  static String replay = "assests/images/replay.svg";
+  static String love = "assests/images/love.svg";
 }
