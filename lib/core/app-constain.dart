@@ -16,4 +16,11 @@ class AppConstain {
   static String replay = "assests/images/replay.svg";
   static String love = "assests/images/love.svg";
   static const pause = "assests/images/pause.svg";
+  static String appImage = "assests/images/testImage.jpeg";
+  static String person = "assests/images/person.svg";
+  static String character = "assests/images/character.jpg";
+  static String more = "assests/images/more.svg";
+  static String global = "assests/images/global.svg";
+  static String mail = "assests/images/mail.svg";
+  static String phone = "assests/images/phone.svg";
 }
