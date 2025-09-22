@@ -29,20 +29,20 @@ class CustomNavbar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          GestureDetector(
+          InkWell(
             onTap: () => onChange(0),
             child: NavbarIconWidget(ico: AppConstain.home, color: currentIndex == 0 ? Color(0xff5203fc) : Colors.white60,),
           ),
-          GestureDetector(
+          InkWell(
             onTap: () => onChange(1),
             child: NavbarIconWidget(ico: AppConstain.cal, color: currentIndex == 1 ? Color(0xff5203fc) : Colors.white60),
           ),
-          GestureDetector(
-            onTap: () {},
+          InkWell(
+            onTap: () => onChange(2),
             child: NavbarIconWidget(ico: AppConstain.chat, color: currentIndex == 2 ? Color(0xff5203fc) : Colors.white60),
           ),
-          GestureDetector(
-            onTap: () {},
+          InkWell(
+            onTap: () => onChange(3),
             child: NavbarIconWidget(ico: AppConstain.profile, color: currentIndex == 3 ? Color(0xff5203fc) : Colors.white60),
           ),
         ],

@@ -13,8 +13,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   onTap() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MusicScreen()));
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => MusicScreen()));
   }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -41,21 +44,22 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-            top: 250,
+            top: 150,
             child: SizedBox(
-              height: MediaQuery.of(context).size.height,
+              // height: MediaQuery.of(context).size.height + 100,
               width: MediaQuery.of(context).size.width,
               child: Container(
                 width: MediaQuery.of(context).size.width,
+                height: MediaQuery.sizeOf(context).height - 220,
                 decoration: BoxDecoration(
-                  color: Colors.grey[300],
+                  color: Colors.grey[100],
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(30)),
                 ),
                 child: CustomScrollView(
                   slivers: [
                     SliverToBoxAdapter(
                       child: Container(
-                        padding: EdgeInsets.only(left: 20, top: 30, bottom: 5),
+                        padding: EdgeInsets.only(left: 20, top: 20, bottom: 5),
                         child: Text(
                           "Aktivias Terakhir",
                           style: TextStyle(
@@ -92,8 +96,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    SliverToBoxAdapter(child: CustomCart(title: 'Meditasi Dasar 2', desc: '2 Menit . Singkart', img: '${AppConstain.imgs[0]}', onTap: () => onTap,)),
-                    SliverToBoxAdapter(child: CustomCart(title: 'Stress bukan segaadfdfdf', desc: '4 Menit . Sedang', img: '${AppConstain.imgs[1]}', onTap: () {},)),
+                    SliverToBoxAdapter(
+                      child: CustomCart(
+                        title: 'Meditasi Dasar 2',
+                        desc: '2 Menit . Singkart',
+                        img: '${AppConstain.imgs[0]}',
+                        onTap: () => onTap,
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: CustomCart(
+                        title: 'Stress bukan segaadfdfdf',
+                        desc: '4 Menit . Sedang',
+                        img: '${AppConstain.imgs[1]}',
+                        onTap: () {},
+                      ),
+                    ),
                   ],
                 ),
               ),

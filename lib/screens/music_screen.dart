@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import '../core/app-constain.dart';
 import '../core/widgets/custom-card.dart';
@@ -13,45 +12,70 @@ class MusicScreen extends StatefulWidget {
 }
 
 class _MusicScreenState extends State<MusicScreen> {
+  bool isPlaying = false;
   double currentValue = 0.0;
-  final double maxValue = 300;
+  final double maxValue = 10;
 
   String formatTime(int second) {
     final minutes = (second ~/ 60).toString();
     final secs = (second % 60).toString().padLeft(2, '0');
     return "$minutes:$secs";
   }
+
   Timer? _timer;
 
   @override
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (currentValue < maxValue) {
-        setState(() {
-          currentValue += 1;
-        });
-      } else {
-        timer.cancel();
-      }
+    // _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    //   if (currentValue < maxValue) {
+    //     setState(() {
+    //       currentValue += 1;
+    //     });
+    //   } else {
+    //     timer.cancel();
+    //   }
+    // });
+  }
+
+  // void startTimer() {
+  //   _timer?.cancel();
+  //   _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+  //     if (currentValue < maxValue) {
+  //       setState(() {
+  //         currentValue += 1;
+  //       });
+  //     } else {
+  //       currentValue = maxValue;
+  //       timer.cancel();
+  //     }
+  //   });
+  // }
+
+  void toggleTimer() {
+    if (isPlaying) {
+      _timer?.cancel();
+    } else {
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        if (currentValue < maxValue) {
+          setState(() {
+            currentValue += 1;
+          });
+        } else {
+          currentValue = maxValue;
+          _timer?.cancel();
+          isPlaying = false;
+        }
+      });
+    }
+
+    setState(() {
+      isPlaying = !isPlaying;
     });
   }
 
-  void startTimer() {
-    _timer?.cancel(); // نوقف أي تايمر موجود
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (currentValue < maxValue) {
-        setState(() {
-          currentValue += 1;
-        });
-      } else {
-        timer.cancel();
-      }
-    });
-  }
 
   void resetTimer() {
     _timer?.cancel();
@@ -60,13 +84,12 @@ class _MusicScreenState extends State<MusicScreen> {
     });
   }
 
-
-
   @override
   void dispose() {
     _timer?.cancel();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +132,7 @@ class _MusicScreenState extends State<MusicScreen> {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.sizeOf(context).height,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Colors.grey[100],
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                     ),
@@ -119,7 +142,11 @@ class _MusicScreenState extends State<MusicScreen> {
                       SliverToBoxAdapter(
                         child: Center(
                           child: Container(
-                            padding: EdgeInsets.only(left: 20, top: 30, bottom: 5),
+                            padding: EdgeInsets.only(
+                              left: 20,
+                              top: 30,
+                              bottom: 5,
+                            ),
                             child: Text(
                               "Daily Meditation",
                               style: TextStyle(
@@ -149,7 +176,11 @@ class _MusicScreenState extends State<MusicScreen> {
                       SliverToBoxAdapter(
                         child: Center(
                           child: Container(
-                            padding: EdgeInsets.only(left: 10, top: 20, bottom: 5),
+                            padding: EdgeInsets.only(
+                              left: 10,
+                              top: 20,
+                              bottom: 5,
+                            ),
                             child: Text(
                               "River Sound",
                               style: TextStyle(
@@ -197,13 +228,13 @@ class _MusicScreenState extends State<MusicScreen> {
                               color: Colors.purple[900],
                               child: InkWell(
                                 onTap: () {
-                                  startTimer();
+                                  toggleTimer();
                                 },
                                 customBorder: CircleBorder(),
                                 child: Padding(
                                   padding: EdgeInsets.all(17),
                                   child: SvgPicture.asset(
-                                    AppConstain.play,
+                                    isPlaying ? AppConstain.pause : AppConstain.play,
                                     height: 40,
                                     colorFilter: const ColorFilter.mode(
                                       Colors.white,
@@ -255,9 +286,12 @@ class _MusicScreenState extends State<MusicScreen> {
                               },
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                              ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(formatTime(currentValue.toInt())),
                                   Text(formatTime(300)),
@@ -294,22 +328,16 @@ class _MusicScreenState extends State<MusicScreen> {
                           ),
                         ),
                       ),
-
-                      SliverToBoxAdapter(
-                        child: CustomCart(
-                          title: 'Meditasi Dasar 2',
-                          desc: '2 Menit . Singkart',
-                          img: '${AppConstain.imgs[0]}',
-                          onTap: () {},
+                      SliverList.separated(
+                        itemBuilder: (context,index)=>                      SizedBox(
+                          child: CustomCart(
+                            title: 'Meditasi Dasar 2',
+                            desc: '2 Menit . Singkart',
+                            img: '${AppConstain.imgs[0]}',
+                            onTap: () {},
+                          ),
                         ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: CustomCart(
-                          title: 'Meditasi Dasar 2',
-                          desc: '2 Menit . Singkart',
-                          img: '${AppConstain.imgs[0]}',
-                          onTap: () {},
-                        ),
+                        separatorBuilder: (context,index)=>const SizedBox(height: 30,),
                       ),
                     ],
                   ),

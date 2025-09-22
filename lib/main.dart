@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/screens/chat_screen.dart';
 import 'package:music_app/screens/dummy_screen.dart';
 import 'package:music_app/screens/home_screen.dart';
-
+import 'package:music_app/screens/profile_screen.dart';
 import 'core/widgets/custom_navBar.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  List<Widget> screens = [HomeScreen(), DummyScreen()];
+  List<Widget> screens = [HomeScreen(), DummyScreen(), ChatScreen(), ProfileScreen()];
   int currentIndex = 0;
   onChange(int index) {
     setState(() {
@@ -35,7 +36,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: Scaffold(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Colors.grey[100],
         body: screens[currentIndex],
         bottomNavigationBar: CustomNavbar(
           currentIndex: currentIndex,

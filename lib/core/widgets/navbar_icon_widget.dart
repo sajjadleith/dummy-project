@@ -9,9 +9,11 @@ class NavbarIconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 30,
+      // width: 30,
+      padding: EdgeInsets.all(10),
       height: MediaQuery.sizeOf(context).height,
       decoration: BoxDecoration(
+        // color: Colors.red,
         border: Border(
           top: BorderSide(color: color, width: 4),
         ),

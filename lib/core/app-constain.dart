@@ -15,4 +15,5 @@ class AppConstain {
   static String backArrow = "assests/images/back_arrow.svg";
   static String replay = "assests/images/replay.svg";
   static String love = "assests/images/love.svg";
+  static const pause = "assests/images/pause.svg";
 }
