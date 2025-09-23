@@ -12,33 +12,13 @@ class DummyScreen extends StatelessWidget {
         child: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-                child: SizedBox(
-                  height: 100,
-                  child: const TextField(
-                    decoration: InputDecoration(hintText: "Hello Ali",filled: true,fillColor: Colors.blue),
-                  ),
-                ),
-              ),
-              ListView.separated(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    width: 100,
-                    height: 100,
-                    color: Colors.red,
-                    child: Center(child: Text("data $index")),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: 10);
-                },
-                itemCount: 3,
-              ),
+                padding: EdgeInsets.only(top: 10, left: 10),
+                child: Text("Register"),
+              )
             ],
           ),
         ),

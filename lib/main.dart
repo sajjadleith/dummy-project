@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_app/screens/chat_screen.dart';
 import 'package:music_app/screens/dummy_screen.dart';
 import 'package:music_app/screens/home_screen.dart';
+import 'package:music_app/screens/login_screen.dart';
 import 'package:music_app/screens/profile_screen.dart';
 import 'core/widgets/custom_navBar.dart';
 
@@ -35,14 +36,15 @@ class _MyAppState extends State<MyApp> {
         fontFamily: "Tajawal",
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Scaffold(
-        backgroundColor: Colors.grey[100],
-        body: screens[currentIndex],
-        bottomNavigationBar: CustomNavbar(
-          currentIndex: currentIndex,
-          onChange: onChange,
-        ),
-      ),
+      // home: Scaffold(
+      //   backgroundColor: Colors.grey[100],
+      //   body: screens[currentIndex],
+      //   bottomNavigationBar: CustomNavbar(
+      //     currentIndex: currentIndex,
+      //     onChange: onChange,
+      //   ),
+      // ),
+      home: LoginScreen(),
     );
   }
 }
