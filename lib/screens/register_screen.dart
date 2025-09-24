@@ -1,5 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:music_app/core/app-constain.dart';
+import 'package:music_app/screens/login_screen.dart';
 
 import '../core/widgets/custome_email.dart';
 import '../core/widgets/cutome_button.dart';
@@ -7,21 +10,21 @@ import '../core/widgets/cutome_button_google.dart';
 import '../core/widgets/cutome_divider.dart';
 import '../core/widgets/cutome_textform.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   bool obscureText = true;
   bool isActive = false;
 
   TextStyle _textStyle() {
     return TextStyle(
       color: Colors.deepPurple,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.bold,
       fontSize: 15,
     );
   }
@@ -43,11 +46,11 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 SizedBox(height: 20),
                 Text(
-                  "Login",
+                  "Register",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Welcome back to the app",
+                  "Create new account for better service",
                   style: TextStyle(color: Colors.grey[800], fontSize: 15),
                 ),
                 SizedBox(height: 20),
@@ -113,38 +116,51 @@ class _LoginScreenState extends State<LoginScreen> {
                 CustomeEmail(),
                 SizedBox(height: 5),
                 CutomeTextform(title: "Password"),
+                CutomeTextform(title: "Confirm Password"),
                 SizedBox(height: 5),
                 // Term & Condition and Privacy
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Checkbox(
-                          value: isActive,
-                          onChanged: (bool? isActive) {
-                            if (isActive == null) {
-                              return;
-                            }
-                            this.isActive = isActive;
+                Container(
+                  // width: MediaQuery.sizeOf(context).width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                        value: isActive,
+                        onChanged: (bool? isActive) {
+                          if (isActive == null) {
+                            return;
+                          }
+                          this.isActive = isActive;
 
-                            setState(() {});
-                          },
-                          activeColor: Colors.deepPurple,
+                          setState(() {});
+                        },
+                        activeColor: Colors.deepPurple,
+                      ),
+                      Expanded(
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(text: "I agree to the "),
+                              TextSpan(text: "Term", style: _textStyle()),
+                              TextSpan(text: " & "),
+                              TextSpan(text: "Condition", style: _textStyle()),
+                              TextSpan(text: " and "),
+                              TextSpan(
+                                text: "Privacy",
+                                style: _textStyle(),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {},
+                              ),
+                            ],
+                          ),
                         ),
-                        Text(
-                          "Keep me signed in",
-                          style: TextStyle(fontSize: 17),
-                        ),
-                      ],
-                    ),
-                    Text("Forget Password", style: _textStyle()),
-                  ],
+                      ),
+                      SizedBox(height: 10),
+                    ],
+                  ),
                 ),
-                CButton(title: 'Login', onPressed: () {}),
+                CButton(title: 'Sign up', onPressed: () {}),
                 SizedBox(height: 20),
                 CutomeDivider(),
                 SizedBox(height: 30),
@@ -155,14 +171,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: "Don't have an account? ",
+                          text: "Already have an account? ",
                           style: TextStyle(fontSize: 16),
                         ),
                         TextSpan(
-                          text: "Sign up",
+                          text: "Sign in",
                           style: _textStyle(),
                           recognizer: TapGestureRecognizer()..onTap = () {
-                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
                           },
                         ),
                       ],

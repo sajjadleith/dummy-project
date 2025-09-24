@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_app/screens/chat_screen.dart';
 import 'package:music_app/screens/dummy_screen.dart';
 import 'package:music_app/screens/home_screen.dart';
-import 'package:music_app/screens/login_screen.dart';
+import 'package:music_app/screens/register_screen.dart';
 import 'package:music_app/screens/profile_screen.dart';
 import 'core/widgets/custom_navBar.dart';
 
@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       //     onChange: onChange,
       //   ),
       // ),
-      home: LoginScreen(),
+      home: RegisterScreen(),
     );
   }
 }

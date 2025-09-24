@@ -23,4 +23,9 @@ class AppConstain {
   static String global = "assests/images/global.svg";
   static String mail = "assests/images/mail.svg";
   static String phone = "assests/images/phone.svg";
+  static String mail2 = "assests/images/mail2.svg";
+  static String show = "assests/images/show.svg";
+  static String lock = "assests/images/lock.svg";
+  static String google = "assests/images/google.svg";
+  static String dontShow = "assests/images/dontShow.svg";
 }
