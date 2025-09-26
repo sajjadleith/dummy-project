@@ -8,6 +8,7 @@ import '../core/widgets/custome_email.dart';
 import '../core/widgets/cutome_button.dart';
 import '../core/widgets/cutome_button_google.dart';
 import '../core/widgets/cutome_divider.dart';
+import '../core/widgets/cutome_phone.dart';
 import '../core/widgets/cutome_textform.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -20,6 +21,8 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   bool obscureText = true;
   bool isActive = false;
+  int selectedIndex = 0;
+  List<Widget> element = [CustomeEmail(), CutomePhone()];
 
   TextStyle _textStyle() {
     return TextStyle(
@@ -61,7 +64,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     // Email and Phone number switcher
                     InkWell(
                       splashColor: Colors.deepPurple,
-                      onTap: () {},
+                      onTap: () {
+                        selectedIndex = 0;
+                        if (selectedIndex == 0) {
+                          element[selectedIndex];
+                        }
+                        setState(() {});
+                      },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,12 +80,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
+                              color: selectedIndex == 0 ? Colors.deepPurple : Colors.black,
                             ),
                           ),
                           Container(
                             width: 30,
                             height: 4,
-                            color: Colors.deepPurple,
+                            color: selectedIndex == 0 ? Colors.deepPurple : null,
                           ),
                         ],
                       ),
@@ -84,7 +94,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(width: 20),
                     InkWell(
                       splashColor: Colors.deepPurple,
-                      onTap: () {},
+                      onTap: () {
+                        selectedIndex = 1;
+                        if (selectedIndex == 1) {
+                          element[selectedIndex];
+                        }
+                        setState(() {});
+                      },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,12 +110,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
+                              color: selectedIndex == 1 ? Colors.deepPurple : Colors.black
                             ),
                           ),
                           Container(
                             width: 100,
                             height: 4,
-                            color: Colors.deepPurple,
+                            color: selectedIndex == 1 ? Colors.deepPurple : null,
                           ),
                         ],
                       ),
@@ -108,12 +125,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 SizedBox(height: 30),
                 Text(
-                  "Email Address",
+                  selectedIndex == 0? "Email Address" : "Phone Number",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 5),
                 // TextFormField,
-                CustomeEmail(),
+                selectedIndex  == 0 ? CustomeEmail(): CutomePhone(),
                 SizedBox(height: 5),
                 CutomeTextform(title: "Password"),
                 CutomeTextform(title: "Confirm Password"),
@@ -177,9 +194,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         TextSpan(
                           text: "Sign in",
                           style: _textStyle(),
-                          recognizer: TapGestureRecognizer()..onTap = () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
-                          },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginScreen(),
+                                ),
+                              );
+                            },
                         ),
                       ],
                     ),

@@ -5,6 +5,7 @@ import '../core/widgets/custome_email.dart';
 import '../core/widgets/cutome_button.dart';
 import '../core/widgets/cutome_button_google.dart';
 import '../core/widgets/cutome_divider.dart';
+import '../core/widgets/cutome_phone.dart';
 import '../core/widgets/cutome_textform.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,6 +18,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool obscureText = true;
   bool isActive = false;
+  int selectedIndex = 0;
+  List<Widget> element = [CustomeEmail(), CutomePhone()];
 
   TextStyle _textStyle() {
     return TextStyle(
@@ -58,7 +61,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     // Email and Phone number switcher
                     InkWell(
                       splashColor: Colors.deepPurple,
-                      onTap: () {},
+                      onTap: () {
+                        selectedIndex = 0;
+                        if (selectedIndex == 0) {
+                          element[selectedIndex];
+                        }
+                        setState(() {});
+                      },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,12 +77,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
+                              color: selectedIndex == 0 ? Colors.deepPurple: Colors.black
                             ),
                           ),
                           Container(
                             width: 30,
                             height: 4,
-                            color: Colors.deepPurple,
+                            color: selectedIndex == 0 ? Colors.deepPurple : null,
                           ),
                         ],
                       ),
@@ -81,7 +91,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(width: 20),
                     InkWell(
                       splashColor: Colors.deepPurple,
-                      onTap: () {},
+                      onTap: () {
+                        selectedIndex = 1;
+                        if (selectedIndex == 1) {
+                          element[selectedIndex];
+                        }
+                        setState(() {});
+                      },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,12 +107,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
+                              color: selectedIndex == 1 ? Colors.deepPurple : Colors.black
                             ),
                           ),
                           Container(
                             width: 100,
                             height: 4,
-                            color: Colors.deepPurple,
+                            color: selectedIndex == 1 ? Colors.deepPurple : null,
                           ),
                         ],
                       ),
@@ -110,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 5),
                 // TextFormField,
-                CustomeEmail(),
+                selectedIndex == 0 ? CustomeEmail() : CutomePhone(),
                 SizedBox(height: 5),
                 CutomeTextform(title: "Password"),
                 SizedBox(height: 5),
