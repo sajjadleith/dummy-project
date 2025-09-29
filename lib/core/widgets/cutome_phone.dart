@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import '../app-constain.dart';
 
 class CutomePhone extends StatefulWidget {
-  const CutomePhone({super.key});
+  const CutomePhone({super.key, required this.controller});
+  final TextEditingController controller;
 
   @override
   State<CutomePhone> createState() => _CutomePhoneState();
@@ -28,6 +29,7 @@ class _CutomePhoneState extends State<CutomePhone> {
           ],
         ),
         child: TextFormField(
+          controller: widget.controller,
           decoration: InputDecoration(
             prefixIcon: Row(
               mainAxisSize: MainAxisSize.min,
@@ -35,17 +37,11 @@ class _CutomePhoneState extends State<CutomePhone> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 2,
-                  ),
+                  padding: const EdgeInsets.only(left: 20, right: 2),
                   child: SvgPicture.asset(
                     AppConstain.phone,
                     width: 20,
-                    colorFilter: ColorFilter.mode(
-                      Colors.grey,
-                      BlendMode.srcIn,
-                    ),
+                    colorFilter: ColorFilter.mode(Colors.grey, BlendMode.srcIn),
                   ),
                 ),
                 Text("|", style: TextStyle(color: Colors.grey)),
@@ -57,6 +53,15 @@ class _CutomePhoneState extends State<CutomePhone> {
               borderSide: BorderSide.none,
             ),
           ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "Phone number is required";
+            }
+            if (value.length < 11) {
+              return "Phone number must be at least 11 digits";
+            }
+            return null;
+          },
         ),
       ),
     );

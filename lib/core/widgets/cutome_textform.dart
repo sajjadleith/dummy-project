@@ -4,9 +4,15 @@ import 'package:flutter_svg/svg.dart';
 import '../app-constain.dart';
 
 class CutomeTextform extends StatefulWidget {
-
-  const CutomeTextform({super.key, required this.title});
+  const CutomeTextform({
+    super.key,
+    required this.title,
+    required this.controller,
+    required this.validator,
+  });
   final String title;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   @override
   State<CutomeTextform> createState() => _CutomeTextformState();
@@ -16,12 +22,11 @@ class _CutomeTextformState extends State<CutomeTextform> {
   bool obscureText = true;
   @override
   Widget build(BuildContext context) {
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 20,),
+        SizedBox(height: 20),
         Text(
           widget.title,
           style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
@@ -42,6 +47,7 @@ class _CutomeTextformState extends State<CutomeTextform> {
               ],
             ),
             child: TextFormField(
+              controller: widget.controller,
               decoration: InputDecoration(
                 prefixIcon: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -49,10 +55,7 @@ class _CutomeTextformState extends State<CutomeTextform> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                        right: 2,
-                      ),
+                      padding: const EdgeInsets.only(left: 20, right: 2),
                       child: SvgPicture.asset(
                         AppConstain.lock,
                         width: 20,
@@ -80,9 +83,7 @@ class _CutomeTextformState extends State<CutomeTextform> {
                       });
                     },
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: SizedBox(
                         width: 25,
                         child: SvgPicture.asset(
@@ -97,9 +98,9 @@ class _CutomeTextformState extends State<CutomeTextform> {
                     ),
                   ),
                 ),
-
               ),
               obscureText: obscureText,
+              validator: widget.validator,
             ),
           ),
         ),

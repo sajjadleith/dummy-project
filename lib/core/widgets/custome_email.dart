@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import '../app-constain.dart';
 
 class CustomeEmail extends StatefulWidget {
-  const CustomeEmail({super.key});
+  const CustomeEmail({super.key, required this.controller});
+  final TextEditingController controller;
 
   @override
   State<CustomeEmail> createState() => _CustomeEmailState();
@@ -28,6 +29,7 @@ class _CustomeEmailState extends State<CustomeEmail> {
           ],
         ),
         child: TextFormField(
+          controller: widget.controller,
           decoration: InputDecoration(
             prefixIcon: Row(
               mainAxisSize: MainAxisSize.min,
@@ -35,17 +37,11 @@ class _CustomeEmailState extends State<CustomeEmail> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 2,
-                  ),
+                  padding: const EdgeInsets.only(left: 20, right: 2),
                   child: SvgPicture.asset(
                     AppConstain.mail2,
                     width: 20,
-                    colorFilter: ColorFilter.mode(
-                      Colors.grey,
-                      BlendMode.srcIn,
-                    ),
+                    colorFilter: ColorFilter.mode(Colors.grey, BlendMode.srcIn),
                   ),
                 ),
                 Text("|", style: TextStyle(color: Colors.grey)),
@@ -57,6 +53,15 @@ class _CustomeEmailState extends State<CustomeEmail> {
               borderSide: BorderSide.none,
             ),
           ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "Email is required";
+            }
+            if (!value.contains("@")) {
+              return "Enter a valid email";
+            }
+            return null;
+          },
         ),
       ),
     );
