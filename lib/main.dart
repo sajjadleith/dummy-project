@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:music_app/screens/chat_screen.dart';
 import 'package:music_app/screens/dummy_screen.dart';
 import 'package:music_app/screens/home_screen.dart';
+import 'package:music_app/screens/onbording_screen.dart';
 import 'package:music_app/screens/register_screen.dart';
 import 'package:music_app/screens/profile_screen.dart';
 import 'core/widgets/custom_navBar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +21,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  List<Widget> screens = [HomeScreen(), DummyScreen(), ChatScreen(), ProfileScreen()];
+  List<Widget> screens = [
+    HomeScreen(),
+    DummyScreen(),
+    ChatScreen(),
+    ProfileScreen(),
+  ];
   int currentIndex = 0;
   onChange(int index) {
     setState(() {
@@ -44,7 +51,8 @@ class _MyAppState extends State<MyApp> {
       //     onChange: onChange,
       //   ),
       // ),
-      home: RegisterScreen(),
+      // home: RegisterScreen(),
+      home: OnbordingScreen(),
     );
   }
 }

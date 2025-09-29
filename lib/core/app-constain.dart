@@ -6,7 +6,13 @@ class AppConstain {
   static String env4 = "assests/images/env4.jpeg";
   static String env5 = "assests/images/env5.jpg";
   static List imgs = [env1, env2, env3, env4, env5];
-  static List quotes = ["Hello Ali Sabbar sldjfldsjflj", "What's good brother dsfsjfljsdf", "Something to say weeeeeeeeeeeeeeee", "How long please to send this message", "Finally finished the quote wooooo yeaaaaah"];
+  static List quotes = [
+    "Hello Ali Sabbar sldjfldsjflj",
+    "What's good brother dsfsjfljsdf",
+    "Something to say weeeeeeeeeeeeeeee",
+    "How long please to send this message",
+    "Finally finished the quote wooooo yeaaaaah",
+  ];
   static String play = "assests/images/play.svg";
   static String home = "assests/images/home.svg";
   static String cal = "assests/images/calender.svg";
@@ -28,4 +34,7 @@ class AppConstain {
   static String lock = "assests/images/lock.svg";
   static String google = "assests/images/google.svg";
   static String dontShow = "assests/images/dontShow.svg";
+  static String onbording1 = "assests/images/onbording_img.svg";
+  static String onbording2 = "assests/images/onbording_img2.svg";
+  static String onbording3 = "assests/images/onbording_img3.svg";
 }

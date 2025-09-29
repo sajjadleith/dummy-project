@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:music_app/screens/register_screen.dart';
 import '../core/widgets/custome_email.dart';
 import '../core/widgets/cutome_button.dart';
 import '../core/widgets/cutome_button_google.dart';
@@ -36,12 +37,22 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    emailController.dispose();
+    phoneController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: Color(0xffFCFBFE),
       body: SafeArea(
         child: SizedBox(
-          width: MediaQuery.sizeOf(context).width,
+          width: w,
           height: MediaQuery.sizeOf(context).height,
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 20),
@@ -219,7 +230,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: _textStyle(),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.pop(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RegisterScreen(),
+                                  ),
+                                );
                               },
                           ),
                         ],

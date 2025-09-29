@@ -39,6 +39,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    emailController.dispose();
+    phoneController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffFCFBFE),
@@ -173,53 +183,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if (value != passwordController.text) {
                         return "Passwords do not match";
                       }
+                      return null;
                     },
                   ),
                   SizedBox(height: 5),
                   // Term & Condition and Privacy
-                  Container(
-                    // width: MediaQuery.sizeOf(context).width,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Checkbox(
-                          value: isActive,
-                          onChanged: (bool? isActive) {
-                            if (isActive == null) {
-                              return;
-                            }
-                            this.isActive = isActive;
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                        value: isActive,
+                        onChanged: (bool? isActive) {
+                          if (isActive == null) {
+                            return;
+                          }
+                          this.isActive = isActive;
 
-                            setState(() {});
-                          },
-                          activeColor: Colors.deepPurple,
-                        ),
-                        Expanded(
-                          child: Text.rich(
-                            TextSpan(
-                              children: [
-                                TextSpan(text: "I agree to the "),
-                                TextSpan(text: "Term", style: _textStyle()),
-                                TextSpan(text: " & "),
-                                TextSpan(
-                                  text: "Condition",
-                                  style: _textStyle(),
-                                ),
-                                TextSpan(text: " and "),
-                                TextSpan(
-                                  text: "Privacy",
-                                  style: _textStyle(),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {},
-                                ),
-                              ],
-                            ),
+                          setState(() {});
+                        },
+                        activeColor: Colors.deepPurple,
+                      ),
+                      Expanded(
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(text: "I agree to the "),
+                              TextSpan(text: "Term", style: _textStyle()),
+                              TextSpan(text: " & "),
+                              TextSpan(text: "Condition", style: _textStyle()),
+                              TextSpan(text: " and "),
+                              TextSpan(
+                                text: "Privacy",
+                                style: _textStyle(),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {},
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(height: 10),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 10),
+                    ],
                   ),
                   CButton(
                     title: 'Sign up',
