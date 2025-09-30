@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:music_app/screens/home_screen.dart';
 import 'package:music_app/screens/register_screen.dart';
 import '../core/widgets/custome_email.dart';
 import '../core/widgets/cutome_button.dart';
@@ -209,6 +210,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         print("value of email: ${emailController.text}");
                         print("value of phone: ${phoneController.text}");
                         print("value of password: ${passwordController.text}");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (contex) => HomeScreen()),
+                        );
                       }
                     },
                   ),

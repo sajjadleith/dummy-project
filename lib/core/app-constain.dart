@@ -37,4 +37,5 @@ class AppConstain {
   static String onbording1 = "assests/images/onbording_img.svg";
   static String onbording2 = "assests/images/onbording_img2.svg";
   static String onbording3 = "assests/images/onbording_img3.svg";
+  static String username = "username";
 }

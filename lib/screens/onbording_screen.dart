@@ -62,7 +62,9 @@ class _OnbordingScreenState extends State<OnbordingScreen> {
               Container(
                 width: width,
                 height: 600,
-                child: SvgPicture.asset(data[_currentPage].image),
+                child: SvgPicture.asset(
+                  data[_currentPage.clamp(0, data.length - 1)].image,
+                ),
               ),
               Positioned(
                 top: 450,
@@ -83,10 +85,21 @@ class _OnbordingScreenState extends State<OnbordingScreen> {
                       Container(
                         width: width,
                         height: 250,
+                        color: Colors.white,
                         child: PageView.builder(
+                          itemCount: data.length,
+                          controller: _pageController,
                           onPageChanged: (index) {
                             _currentPage = index;
                             setState(() {});
+                            if (index == data.length - 1) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginScreen(),
+                                ),
+                              );
+                            }
                           },
                           itemBuilder: (context, index) {
                             return Column(
