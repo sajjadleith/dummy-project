@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:music_app/core/app-constain.dart';
-import 'package:music_app/core/widgets/cutome_button.dart';
 import 'package:music_app/models/gros_model.dart';
 import 'package:music_app/screens/login_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class OnbordingScreen extends StatefulWidget {
   OnbordingScreen({Key? key}) : super(key: key);

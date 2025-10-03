@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/core/routes/app_routes.dart';
+import 'package:music_app/core/routes/route_provider.dart';
 import 'package:music_app/screens/chat_screen.dart';
 import 'package:music_app/screens/dummy_screen.dart';
 import 'package:music_app/screens/dummy_screen2.dart';
@@ -53,7 +55,8 @@ class _MyAppState extends State<MyApp> {
       //   ),
       // ),
       // home: RegisterScreen(),
-      home: DummyScreen2(),
+      initialRoute: AppRoutes.defaultRoute,
+      routes: routeProvider,
     );
   }
 }
