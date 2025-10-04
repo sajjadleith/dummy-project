@@ -5,7 +5,8 @@ import 'package:music_app/core/routes/app_routes.dart';
 import 'package:music_app/core/widgets/custome_textfiel.dart';
 
 class PageScreen2 extends StatefulWidget {
-  PageScreen2({Key? key}) : super(key: key);
+  final Map<String, dynamic>? info;
+  const PageScreen2({super.key, this.info});
 
   @override
   _PageScreen2State createState() => _PageScreen2State();
@@ -25,10 +26,15 @@ class _PageScreen2State extends State<PageScreen2> {
   @override
   Widget build(BuildContext context) {
     const padding = EdgeInsets.symmetric(horizontal: 10, vertical: 10);
-    final args = ModalRoute.of(context)!.settings.arguments as Map;
-    String name = args["name"] ?? "Unkown";
-    int age = args["age"] ?? 0;
-    String gender = args["gender"] ?? "Unkown";
+    // final args =
+    //     ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    // String name = args?["name"] ?? "Unkown";
+    // int age = args?["age"] ?? 0;
+    // String gender = args?["gender"] ?? "Unkown";
+    final args = widget.info ?? {};
+    final name = args["name"] ?? "Unknown";
+    final age = args["age"] ?? 0;
+    final gender = args["gender"] ?? "Not selected";
 
     return Scaffold(
       body: SafeArea(

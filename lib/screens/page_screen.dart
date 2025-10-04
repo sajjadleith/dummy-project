@@ -17,7 +17,7 @@ class _PageScreenState extends State<PageScreen> {
   Map<String, dynamic> get data => {
     "name": nameController.text,
     "age": int.parse(ageController.text),
-    "gender": selectedValue,
+    "gender": selectedValue ?? "Unknown",
   };
 
   @override

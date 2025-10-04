@@ -5,7 +5,8 @@ import 'package:music_app/core/routes/app_routes.dart';
 import 'package:music_app/core/routes/route_provider.dart';
 
 class PageScreen3 extends StatefulWidget {
-  PageScreen3({Key? key}) : super(key: key);
+  final Map<String, dynamic>? info;
+  const PageScreen3({super.key, this.info});
 
   @override
   _PageScreen3State createState() => _PageScreen3State();
@@ -14,8 +15,12 @@ class PageScreen3 extends StatefulWidget {
 class _PageScreen3State extends State<PageScreen3> {
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Map;
-    double salary = args["salary"] ?? "0.0";
+    //   final args = ModalRoute.of(context)!.settings.arguments as Map;
+    //   double salary = args["salary"] ?? "0.0";
+    //   String employeeName = args["employeeName"] ?? "Unknown";
+    //   bool isAdmin = args["isAdmin"] ?? false;
+    final args = widget.info ?? {};
+    double salary = args["salary"] ?? 0.0;
     String employeeName = args["employeeName"] ?? "Unknown";
     bool isAdmin = args["isAdmin"] ?? false;
 
