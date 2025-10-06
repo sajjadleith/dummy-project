@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_app/core/routes/app_routes.dart';
 import 'package:music_app/core/routes/generated_route.dart';
 import 'package:music_app/core/routes/route_provider.dart';
+import 'package:music_app/screens/active_tasks_screen.dart';
 import 'package:music_app/screens/chat_screen.dart';
 import 'package:music_app/screens/dummy_screen.dart';
 import 'package:music_app/screens/dummy_screen2.dart';
@@ -56,9 +57,10 @@ class _MyAppState extends State<MyApp> {
       //   ),
       // ),
       // home: RegisterScreen(),
-      initialRoute: AppRoutes.defaultRoute,
-      // routes: routeProvider,
-      onGenerateRoute: AppRouteGenerator.generateRoute,
+      // initialRoute: AppRoutes.defaultRoute,
+      // // routes: routeProvider,
+      // onGenerateRoute: AppRouteGenerator.generateRoute,
+      home: ActiveTasksScreen(),
     );
   }
 }
