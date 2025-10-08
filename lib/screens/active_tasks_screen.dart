@@ -22,6 +22,7 @@ class _ActiveTasksScreenState extends State<ActiveTasksScreen> {
   // Delete Task
   void _deleteTask(TaskModel task) {
     task.status = TaskStatus.deleted;
+    tasks.remove(task);
     setState(() {});
   }
 
