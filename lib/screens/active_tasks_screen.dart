@@ -77,22 +77,33 @@ class _ActiveTasksScreenState extends State<ActiveTasksScreen> {
     );
   }
 
+  Color checkStatus(TaskStatus status) {
+    switch (status) {
+      case TaskStatus.pending:
+        return Colors.white;
+      case TaskStatus.updated:
+        return Colors.greenAccent;
+      case TaskStatus.deleted:
+        return Colors.redAccent;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final activeTasks = tasks
-        .where((task) => task.status != TaskStatus.deleted)
-        .toList();
     return Scaffold(
-      body: activeTasks.isEmpty
+      body: tasks.isEmpty
           ? Center(child: Text("Please Add a Task"))
           : ListView.builder(
-              itemCount: activeTasks.length,
+              itemCount: tasks.length,
               itemBuilder: (context, index) {
+                final task = tasks[index];
+                print(task.status);
                 return Card(
+                  color: checkStatus(task.status),
                   child: ListTile(
-                    leading: activeTasks[index].img != null
+                    leading: task.img != null
                         ? Image.file(
-                            File(activeTasks[index].img!),
+                            File(task.img!),
                             width: 50,
                             fit: BoxFit.cover,
                           )
@@ -101,9 +112,9 @@ class _ActiveTasksScreenState extends State<ActiveTasksScreen> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(activeTasks[index].title),
+                        Text(task.title),
                         Text(
-                          activeTasks[index].time ?? "0:0",
+                          task.time ?? "0:0",
                           style: TextStyle(fontSize: 12),
                         ),
                       ],
@@ -111,21 +122,18 @@ class _ActiveTasksScreenState extends State<ActiveTasksScreen> {
                     subtitle: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(activeTasks[index].desc ?? ""),
-                        Text(activeTasks[index].date ?? ""),
-                      ],
+                      children: [Text(task.desc ?? ""), Text(task.date ?? "")],
                     ),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
                           icon: Icon(Icons.edit),
-                          onPressed: () => _editTask(activeTasks[index], index),
+                          onPressed: () => _editTask(task, index),
                         ),
                         IconButton(
                           icon: const Icon(Icons.delete),
-                          onPressed: () => _deleteTask(activeTasks[index]),
+                          onPressed: () => _deleteTask(task),
                         ),
                       ],
                     ),

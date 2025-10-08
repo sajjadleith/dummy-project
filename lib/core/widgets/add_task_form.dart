@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:music_app/core/validation.dart';
 import 'package:music_app/models/task_model.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -35,8 +36,40 @@ class _AddTaskFormState extends State<AddTaskForm> {
     }
   }
 
+  Future<void> _pickDate() async {
+    DateTime? pickDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1999),
+      lastDate: DateTime(2100),
+    );
+    if (pickDate != null) {
+      _dateController.text =
+          "${pickDate.day}/${pickDate.month}/${pickDate.year}";
+    }
+    setState(() {});
+  }
+
+  Future<void> _pickTime() async {
+    TimeOfDay? pickTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (pickTime != null) {
+      _timeController.text = "${pickTime.hour}:${pickTime.minute}";
+    }
+  }
+
+  String? imageErrorText;
+
   void _submit() {
     if (_formKey.currentState!.validate()) {
+      final imageError = Validation.imageValidation(_imageFile);
+      if (imageError != null) {
+        imageErrorText = imageError;
+        return;
+      }
+
       final newTask = TaskModel(
         title: _titleController.text,
         desc: _descController.text,
@@ -45,10 +78,18 @@ class _AddTaskFormState extends State<AddTaskForm> {
         img: _imageFile?.path,
       );
       if (widget.existingTask != null) {
-        widget.onAdd(newTask);
+        // final w = widget.existingTask;
+        // w!.status = TaskStatus.updated;
+        // w.title = _titleController.text;
+        // w.desc = _descController.text;
+        // w.time = _timeController.text;
+        // w.date = _dateController.text;
+        TaskModel updatedTask = newTask.copyWith(status: TaskStatus.updated);
+        widget.onAdd(updatedTask);
       } else {
         widget.onAdd(newTask);
       }
+      setState(() {});
       Navigator.pop(context);
     }
   }
@@ -78,20 +119,26 @@ class _AddTaskFormState extends State<AddTaskForm> {
             TextFormField(
               controller: _titleController,
               decoration: InputDecoration(labelText: "Title"),
-              validator: (value) =>
-                  value!.isEmpty ? "Please Enter the Title" : null,
+              validator: Validation.titleValidation,
             ),
             TextFormField(
               controller: _descController,
               decoration: InputDecoration(labelText: "Description"),
+              validator: Validation.descValidation,
             ),
             TextFormField(
               controller: _timeController,
+              readOnly: true,
               decoration: InputDecoration(labelText: "Time"),
+              validator: Validation.timeValidation,
+              onTap: _pickTime,
             ),
             TextFormField(
               controller: _dateController,
+              readOnly: true,
               decoration: InputDecoration(labelText: "Date"),
+              validator: Validation.dateValidation,
+              onTap: _pickDate,
             ),
             SizedBox(height: 20),
             if (_imageFile != null)
@@ -107,6 +154,14 @@ class _AddTaskFormState extends State<AddTaskForm> {
               icon: Icon(Icons.photo),
               label: Text("Pick Image"),
             ),
+            if (imageErrorText != null)
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Text(
+                  imageErrorText!,
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: _submit,

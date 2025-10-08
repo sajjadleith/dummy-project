@@ -8,6 +8,7 @@ import 'package:music_app/screens/dummy_screen.dart';
 import 'package:music_app/screens/dummy_screen2.dart';
 import 'package:music_app/screens/home_screen.dart';
 import 'package:music_app/screens/onbording_screen.dart';
+import 'package:music_app/screens/product_screen.dart';
 import 'package:music_app/screens/register_screen.dart';
 import 'package:music_app/screens/profile_screen.dart';
 import 'core/widgets/custom_navBar.dart';
@@ -60,7 +61,7 @@ class _MyAppState extends State<MyApp> {
       // initialRoute: AppRoutes.defaultRoute,
       // // routes: routeProvider,
       // onGenerateRoute: AppRouteGenerator.generateRoute,
-      home: ActiveTasksScreen(),
+      home: ProductScreen(),
     );
   }
 }
