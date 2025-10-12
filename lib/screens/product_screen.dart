@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/core/app-constain.dart';
 import 'package:music_app/core/app_extantion.dart';
 import 'package:music_app/models/product_model.dart';
+import 'package:music_app/screens/cart_screen.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -83,6 +85,50 @@ class _ProductScreenState extends State<ProductScreen> {
     setState(() {});
   }
 
+  List<ProductModel> cartItem = [];
+  // void _addToCart(ProductModel product) {
+  //   cartItem.add(product);
+  //   setState(() {});
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => CartScreen(cartItem: cartItem)),
+  //   );
+  // }
+
+  void _addToCart(ProductModel product) {
+    final existingProductIndex = cartItem.indexWhere(
+      (p) => p.name == product.name,
+    );
+
+    if (existingProductIndex != -1) {
+      cartItem[existingProductIndex] = ProductModel(
+        name: cartItem[existingProductIndex].name,
+        img: cartItem[existingProductIndex].img,
+        price: cartItem[existingProductIndex].price,
+        inStack: cartItem[existingProductIndex].inStack,
+        quantity: cartItem[existingProductIndex].quantity + 1,
+      );
+    } else {
+      cartItem.add(
+        ProductModel(
+          name: product.name,
+          img: product.img,
+          price: product.price,
+          inStack: product.inStack,
+          quantity: 1,
+        ),
+      );
+    }
+
+    setState(() {});
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("${product.name} added to cart"),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,16 +155,112 @@ class _ProductScreenState extends State<ProductScreen> {
                   ? Text("Search For An Item")
                   : SizedBox(
                       height: context.height,
-                      child: ListView.builder(
+                      child: ListView.separated(
+                        separatorBuilder: (context, index) {
+                          return SizedBox(height: 20);
+                        },
                         itemCount: products.length,
                         itemBuilder: (context, index) {
-                          return Card(child: Text(products[index].name));
+                          return Container(
+                            height: 130,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.white,
+                                  spreadRadius: 2,
+                                  blurRadius: 1,
+                                  offset: Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 100,
+                                  height: 100,
+                                  margin: EdgeInsets.only(left: 20),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                      image: AssetImage(AppConstain.imgs[0]),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        products[index].name,
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "Quantity: ${products[index].quantity}",
+                                      ),
+                                      SizedBox(height: 20),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            "\$${products[index].price}",
+                                            style: TextStyle(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(width: 20),
+                                          Container(
+                                            width: 90,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey[200],
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: ElevatedButton(
+                                              onPressed: () =>
+                                                  _addToCart(products[index]),
+                                              child: Text("Add to Cart"),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       ),
                     ),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CartScreen(cartItem: cartItem),
+            ),
+          );
+        },
+        child: Icon(Icons.shopping_cart),
       ),
     );
   }

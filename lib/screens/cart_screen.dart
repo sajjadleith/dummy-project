@@ -5,54 +5,47 @@ import 'package:music_app/core/widgets/custom_product_cart.dart';
 import 'package:music_app/models/product_model.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
+  final List<ProductModel> cartItem;
+  const CartScreen({super.key, required this.cartItem});
 
   @override
   _CartScreenState createState() => _CartScreenState();
 }
 
 class _CartScreenState extends State<CartScreen> {
-  List<ProductModel> products = [
-    ProductModel(
-      name: "Laptop",
-      img: "https://example.com/images/laptop.png",
-      price: 1200.0,
-      inStack: true,
-      quantity: 5,
-    ),
-    ProductModel(
-      name: "Smartphone",
-      img:
-          "https://thumbs.dreamstime.com/b/wildflowers-blooming-sunset-nature-scenery-wildflowers-blooming-sunset-nature-scenery-388164189.jpg?w=992",
-      price: 800.0,
-      inStack: true,
-      quantity: 10,
-    ),
-    ProductModel(
-      name: "Headphones",
-      img:
-          "https://thumbs.dreamstime.com/b/incredibly-beautiful-sunset-sun-lake-sunrise-landscape-panorama-nature-sky-amazing-colorful-clouds-fantasy-design-115177001.jpg?w=768",
-      price: 150.0,
-      inStack: false,
-      quantity: 0,
-    ),
-    ProductModel(
-      name: "Smartwatch",
-      img:
-          "https://thumbs.dreamstime.com/b/nature-forest-trees-growing-to-upward-to-sun-wallpaper-42907586.jpg?w=768",
-      price: 200.0,
-      inStack: true,
-      quantity: 7,
-    ),
-    ProductModel(
-      name: "Camera",
-      img:
-          "https://thumbs.dreamstime.com/b/concept-father-s-day-happy-family-dad-child-daughter-back-nature-park-149563964.jpg?w=768",
-      price: 500.0,
-      inStack: true,
-      quantity: 3,
-    ),
-  ];
+  TextEditingController _discountController = TextEditingController();
+  int discount = 0;
+  Map<String, int> discountCodes = {"sajjad": 25, "ali": 50};
+  void applyDiscount() {
+    String code = _discountController.text.trim().toLowerCase();
+    if (discountCodes.containsKey(code)) {
+      discount = discountCodes[code]!;
+      setState(() {});
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("$discount discount applied")));
+    } else {
+      discount = 0;
+      setState(() {});
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Wrong discount code")));
+    }
+  }
+
+  double _getSubTotalPrice() {
+    double total = 0;
+    for (var item in widget.cartItem) {
+      total += item.price * item.quantity;
+    }
+    return total;
+  }
+
+  double _getTotalPrice() {
+    double subTotal = _getSubTotalPrice();
+    double total = subTotal - discount;
+    return total < 0 ? 0 : total;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +66,9 @@ class _CartScreenState extends State<CartScreen> {
                   Material(
                     child: InkWell(
                       borderRadius: BorderRadius.circular(10),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                       child: Ink(
                         width: 50,
                         height: 50,
@@ -116,9 +111,9 @@ class _CartScreenState extends State<CartScreen> {
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 20);
                 },
-                itemCount: products.length,
+                itemCount: widget.cartItem.length,
                 itemBuilder: (context, index) {
-                  final product = products[index];
+                  final product = widget.cartItem[index];
                   return Dismissible(
                     key: Key(product.name),
                     direction: DismissDirection.endToStart,
@@ -136,7 +131,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                     onDismissed: (direction) {
-                      products.removeAt(index);
+                      widget.cartItem.removeAt(index);
                       setState(() {});
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("${product.name} is deleted")),
@@ -175,6 +170,7 @@ class _CartScreenState extends State<CartScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     TextField(
+                      controller: _discountController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.grey[200],
@@ -198,7 +194,7 @@ class _CartScreenState extends State<CartScreen> {
                               ),
                               backgroundColor: Colors.white,
                             ),
-                            onPressed: () {},
+                            onPressed: applyDiscount,
                             child: Text("Apply"),
                           ),
                         ),
@@ -210,7 +206,7 @@ class _CartScreenState extends State<CartScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Sub total: ",
+                          "Sub total:",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.normal,
@@ -218,7 +214,7 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                         ),
                         Text(
-                          "\$175.00",
+                          "\$${_getSubTotalPrice()}",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -240,7 +236,7 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                         ),
                         Text(
-                          "\$25",
+                          discount.toString(),
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -269,7 +265,7 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                         ),
                         Text(
-                          "\$200.00",
+                          "\$${_getTotalPrice()}",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

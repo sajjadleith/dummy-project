@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
       // initialRoute: AppRoutes.defaultRoute,
       // // routes: routeProvider,
       // onGenerateRoute: AppRouteGenerator.generateRoute,
-      home: CartScreen(),
+      home: ProductScreen(),
     );
   }
 }
