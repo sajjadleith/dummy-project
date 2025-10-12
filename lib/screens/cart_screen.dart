@@ -14,16 +14,20 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   TextEditingController _discountController = TextEditingController();
-  int discount = 0;
-  Map<String, int> discountCodes = {"sajjad": 25, "ali": 50};
+  double discount = 0.0;
+  Map<String, double> discountCodes = {"sajjad": 0.25, "ali": 0.50};
   void applyDiscount() {
     String code = _discountController.text.trim().toLowerCase();
     if (discountCodes.containsKey(code)) {
       discount = discountCodes[code]!;
       setState(() {});
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("$discount discount applied")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "${(discount * 100).toStringAsFixed(0)}% discount applied",
+          ),
+        ),
+      );
     } else {
       discount = 0;
       setState(() {});
@@ -43,7 +47,7 @@ class _CartScreenState extends State<CartScreen> {
 
   double _getTotalPrice() {
     double subTotal = _getSubTotalPrice();
-    double total = subTotal - discount;
+    double total = subTotal - (subTotal * discount);
     return total < 0 ? 0 : total;
   }
 
@@ -236,7 +240,7 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                         ),
                         Text(
-                          discount.toString(),
+                          "${(discount * 100).toStringAsFixed(0)}%",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

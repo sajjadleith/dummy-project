@@ -55,13 +55,6 @@ class _ProductScreenState extends State<ProductScreen> {
     ),
   ];
 
-  // late Iterable<ProductModel> search = products
-  //     .where(
-  //       (product) => product.name.toLowerCase().contains(
-  //         _searchController.text.toLowerCase(),
-  //       ),
-  //     )
-  //     .toList();
   List<ProductModel> allProduct = [];
   @override
   void initState() {
@@ -86,14 +79,6 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   List<ProductModel> cartItem = [];
-  // void _addToCart(ProductModel product) {
-  //   cartItem.add(product);
-  //   setState(() {});
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => CartScreen(cartItem: cartItem)),
-  //   );
-  // }
 
   void _addToCart(ProductModel product) {
     final existingProductIndex = cartItem.indexWhere(
@@ -204,9 +189,9 @@ class _ProductScreenState extends State<ProductScreen> {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      Text(
-                                        "Quantity: ${products[index].quantity}",
-                                      ),
+                                      // Text(
+                                      //   "Quantity: ${products[index].quantity}",
+                                      // ),
                                       SizedBox(height: 20),
                                       Row(
                                         mainAxisAlignment:
