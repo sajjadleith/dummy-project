@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:music_app/api_app/dummy_for_api_screen.dart';
 import 'package:music_app/screens/home_screen.dart';
 import 'package:music_app/screens/register_screen.dart';
 import '../core/widgets/custome_email.dart';
@@ -8,6 +11,7 @@ import '../core/widgets/cutome_button_google.dart';
 import '../core/widgets/cutome_divider.dart';
 import '../core/widgets/cutome_phone.dart';
 import '../core/widgets/cutome_textform.dart';
+import "package:http/http.dart" as http;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,21 +24,43 @@ class _LoginScreenState extends State<LoginScreen> {
   bool obscureText = true;
   bool isActive = false;
   int selectedIndex = 0;
+  bool isLoading = false;
   final _formKey = GlobalKey<FormState>(); // form key :)
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController emailController = TextEditingController(text: "johndss");
   final TextEditingController phoneController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController(text: "m38rmF\$");
   late List<Widget> element = [
     CustomeEmail(controller: emailController),
     CutomePhone(controller: phoneController),
   ];
 
   TextStyle _textStyle() {
-    return TextStyle(
-      color: Colors.deepPurple,
-      fontWeight: FontWeight.w500,
-      fontSize: 15,
+    return TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w500, fontSize: 15);
+  }
+
+  final url = Uri.parse("https://fakestoreapi.com/auth/login");
+  void login(BuildContext context) async {
+    isLoading = true;
+    setState(() {});
+    final info = {"username": emailController.text, "password": passwordController.text};
+    final encodedData = jsonEncode(info);
+    final response = await http.post(
+      url,
+      body: encodedData,
+      headers: {"Content-Type": "application/json"},
     );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final token = jsonDecode(response.body);
+      Navigator.push(context, MaterialPageRoute(builder: (contex) => DummyForApiScreen()));
+      isLoading = false;
+      setState(() {});
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("${response.body} status code is ${response.statusCode}")),
+      );
+      isLoading = false;
+      setState(() {});
+    }
   }
 
   @override
@@ -65,10 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 20),
-                  Text(
-                    "Login",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
+                  Text("Login", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
                   Text(
                     "Welcome back to the app",
                     style: TextStyle(color: Colors.grey[800], fontSize: 15),
@@ -97,17 +120,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                                color: selectedIndex == 0
-                                    ? Colors.deepPurple
-                                    : Colors.black,
+                                color: selectedIndex == 0 ? Colors.deepPurple : Colors.black,
                               ),
                             ),
                             Container(
                               width: 30,
                               height: 4,
-                              color: selectedIndex == 0
-                                  ? Colors.deepPurple
-                                  : null,
+                              color: selectedIndex == 0 ? Colors.deepPurple : null,
                             ),
                           ],
                         ),
@@ -131,17 +150,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                                color: selectedIndex == 1
-                                    ? Colors.deepPurple
-                                    : Colors.black,
+                                color: selectedIndex == 1 ? Colors.deepPurple : Colors.black,
                               ),
                             ),
                             Container(
                               width: 100,
                               height: 4,
-                              color: selectedIndex == 1
-                                  ? Colors.deepPurple
-                                  : null,
+                              color: selectedIndex == 1 ? Colors.deepPurple : null,
                             ),
                           ],
                         ),
@@ -194,28 +209,20 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             activeColor: Colors.deepPurple,
                           ),
-                          Text(
-                            "Keep me signed in",
-                            style: TextStyle(fontSize: 17),
-                          ),
+                          Text("Keep me signed in", style: TextStyle(fontSize: 17)),
                         ],
                       ),
                       Text("Forget Password", style: _textStyle()),
                     ],
                   ),
-                  CButton(
-                    title: 'Login',
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        print("value of email: ${emailController.text}");
-                        print("value of phone: ${phoneController.text}");
-                        print("value of password: ${passwordController.text}");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (contex) => HomeScreen()),
-                        );
-                      }
-                    },
+                  IgnorePointer(
+                    ignoring: isLoading,
+                    child: CButton(
+                      title: isLoading ? 'Loading' : "Login",
+                      onPressed: () {
+                        login(context);
+                      },
+                    ),
                   ),
                   SizedBox(height: 20),
                   CutomeDivider(),
@@ -226,10 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(
-                            text: "Don't have an account? ",
-                            style: TextStyle(fontSize: 16),
-                          ),
+                          TextSpan(text: "Don't have an account? ", style: TextStyle(fontSize: 16)),
                           TextSpan(
                             text: "Sign up",
                             style: _textStyle(),
@@ -237,9 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ..onTap = () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => RegisterScreen(),
-                                  ),
+                                  MaterialPageRoute(builder: (context) => RegisterScreen()),
                                 );
                               },
                           ),

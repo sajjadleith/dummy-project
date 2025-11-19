@@ -13,8 +13,10 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  TextEditingController _discountController = TextEditingController();
+  final TextEditingController _discountController = TextEditingController();
   double discount = 0.0;
+  double total = 0.0;
+  double subTotal = 0.0;
   Map<String, double> discountCodes = {"sajjad": 0.25, "ali": 0.50};
   void applyDiscount() {
     String code = _discountController.text.trim().toLowerCase();
@@ -38,17 +40,30 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   double _getSubTotalPrice() {
-    double total = 0;
+    double subTotal = 0.0;
     for (var item in widget.cartItem) {
-      total += item.price * item.quantity;
+      subTotal += item.price * item.quantity;
     }
-    return total;
+    return subTotal;
   }
 
   double _getTotalPrice() {
     double subTotal = _getSubTotalPrice();
-    double total = subTotal - (subTotal * discount);
+    total = subTotal - (subTotal * discount);
     return total < 0 ? 0 : total;
+  }
+
+  void _decreament(int index) {
+    if (widget.cartItem[index].quantity > 1) {
+      widget.cartItem[index].quantity -= 1;
+    } else {
+      widget.cartItem.removeAt(index);
+    }
+    setState(() {});
+  }
+
+  void _increament(int index) {
+    widget.cartItem[index].quantity++;
   }
 
   @override
@@ -145,6 +160,7 @@ class _CartScreenState extends State<CartScreen> {
                       name: product.name,
                       quantity: product.quantity,
                       price: product.price,
+                      onQuantityChanged: () {},
                     ),
                   );
                 },

@@ -4,7 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import '../app-constain.dart';
 
 class CustomCart extends StatelessWidget {
-  const CustomCart({super.key, required this.title, required this.desc, required this.img, required this.onTap});
+  const CustomCart({
+    super.key,
+    required this.title,
+    required this.desc,
+    required this.img,
+    required this.onTap,
+  });
 
   final String title;
   final String desc;
@@ -13,7 +19,8 @@ class CustomCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      width: double.infinity,
       padding: const EdgeInsets.only(top: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,12 +33,7 @@ class CustomCart extends StatelessWidget {
                 height: 100,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade200,
-                      spreadRadius: 1,
-                    ),
-                  ],
+                  boxShadow: [BoxShadow(color: Colors.grey.shade200, spreadRadius: 1)],
                 ),
               ),
               Container(
@@ -39,12 +41,7 @@ class CustomCart extends StatelessWidget {
                 height: 100,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                    image: AssetImage(
-                      img,
-                    ),
-                    fit: BoxFit.cover,
-                  ),
+                  image: DecorationImage(image: NetworkImage(img), fit: BoxFit.cover),
                 ),
               ),
               Positioned(
@@ -61,50 +58,32 @@ class CustomCart extends StatelessWidget {
                       bottomRight: Radius.circular(20),
                     ),
                   ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment:
-                    CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 20,
-                            left: 10,
-                          ),
+                          padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
                           child: Column(
-                            mainAxisAlignment:
-                            MainAxisAlignment.start,
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding:
-                                const EdgeInsets.only(
-                                  bottom: 10,
-                                ),
+                                padding: const EdgeInsets.only(bottom: 10),
                                 child: Text(
                                   title,
                                   // maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight:
-                                    FontWeight.bold,
-                                  ),
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                                 ),
                               ),
                               Text(
                                 desc,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: Colors.grey[500],
-                                ),
+                                style: TextStyle(color: Colors.grey[500]),
                               ),
                             ],
                           ),
@@ -121,11 +100,7 @@ class CustomCart extends StatelessWidget {
                             child: SvgPicture.asset(
                               AppConstain.play,
                               height: 15,
-                              colorFilter:
-                              const ColorFilter.mode(
-                                Colors.white,
-                                BlendMode.srcIn,
-                              ),
+                              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                             ),
                           ),
                         ),

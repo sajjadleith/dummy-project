@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/api_app/dummy_for_api_screen.dart';
 import 'package:music_app/core/routes/app_routes.dart';
 import 'package:music_app/core/routes/generated_route.dart';
-import 'package:music_app/core/routes/route_provider.dart';
-import 'package:music_app/screens/active_tasks_screen.dart';
-import 'package:music_app/screens/cart_screen.dart';
 import 'package:music_app/screens/chat_screen.dart';
 import 'package:music_app/screens/dummy_screen.dart';
-import 'package:music_app/screens/dummy_screen2.dart';
 import 'package:music_app/screens/home_screen.dart';
+import 'package:music_app/screens/login_screen.dart';
 import 'package:music_app/screens/onbording_screen.dart';
-import 'package:music_app/screens/product_screen.dart';
-import 'package:music_app/screens/register_screen.dart';
 import 'package:music_app/screens/profile_screen.dart';
-import 'core/widgets/custom_navBar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:music_app/screens/register_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,12 +23,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  List<Widget> screens = [
-    HomeScreen(),
-    DummyScreen(),
-    ChatScreen(),
-    ProfileScreen(),
-  ];
+  List<Widget> screens = [HomeScreen(), DummyScreen(), ChatScreen(), ProfileScreen()];
   int currentIndex = 0;
   onChange(int index) {
     setState(() {
@@ -58,11 +48,11 @@ class _MyAppState extends State<MyApp> {
       //     onChange: onChange,
       //   ),
       // ),
-      // home: RegisterScreen(),
+      home: HomeScreen(),
       // initialRoute: AppRoutes.defaultRoute,
       // // routes: routeProvider,
       // onGenerateRoute: AppRouteGenerator.generateRoute,
-      home: ProductScreen(),
+      // home: LoginScreen(),
     );
   }
 }

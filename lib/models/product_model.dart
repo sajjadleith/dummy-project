@@ -3,7 +3,7 @@ class ProductModel {
   final String img;
   final double price;
   final bool inStack;
-  final int quantity;
+  int quantity;
 
   ProductModel({
     required this.name,

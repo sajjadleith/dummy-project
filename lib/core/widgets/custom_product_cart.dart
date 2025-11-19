@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:music_app/core/app-constain.dart';
 
 class CustomProductCart extends StatefulWidget {
-  const CustomProductCart({
+  CustomProductCart({
     super.key,
     required this.name,
     required this.quantity,
     required this.price,
+    required this.onQuantityChanged,
   });
+  final VoidCallback onQuantityChanged;
   final String name;
-  final int quantity;
+  int quantity;
   final double price;
 
   @override
@@ -17,7 +19,10 @@ class CustomProductCart extends StatefulWidget {
 }
 
 class _CustomProductCartState extends State<CustomProductCart> {
-  int _count = 1;
+  double getPrice() {
+    return widget.quantity * widget.price;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,6 +62,7 @@ class _CustomProductCartState extends State<CustomProductCart> {
               children: [
                 Text(
                   widget.name,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Text("Quantity: ${widget.quantity}"),
@@ -65,16 +71,21 @@ class _CustomProductCartState extends State<CustomProductCart> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      "\$${widget.price}",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(width: 20),
                     Container(
                       width: 90,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "\$${getPrice().toStringAsFixed(1)}",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Container(
+                      width: 100,
                       height: 40,
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
@@ -92,11 +103,10 @@ class _CustomProductCartState extends State<CustomProductCart> {
                                 borderRadius: BorderRadius.circular(10),
                                 onTap: () {
                                   if (widget.quantity > 0) {
-                                    _count--;
-                                    if (_count == 0) {
-                                      _count = 1;
-                                    }
-                                    setState(() {});
+                                    setState(() {
+                                      widget.quantity--;
+                                    });
+                                    widget.onQuantityChanged();
                                   }
                                 },
                                 child: Ink(
@@ -119,10 +129,7 @@ class _CustomProductCartState extends State<CustomProductCart> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 3),
-                            child: Text(_count.toString()),
-                          ),
+                          Center(child: Text(widget.quantity.toString())),
                           Padding(
                             padding: const EdgeInsets.only(left: 5, right: 5),
                             child: Material(
@@ -130,10 +137,10 @@ class _CustomProductCartState extends State<CustomProductCart> {
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(10),
                                 onTap: () {
-                                  if (widget.quantity > 0) {
-                                    _count++;
-                                    setState(() {});
-                                  }
+                                  setState(() {
+                                    widget.quantity++;
+                                  });
+                                  widget.onQuantityChanged();
                                 },
                                 child: Ink(
                                   width: 30,

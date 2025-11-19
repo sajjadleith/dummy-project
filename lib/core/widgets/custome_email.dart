@@ -53,15 +53,6 @@ class _CustomeEmailState extends State<CustomeEmail> {
               borderSide: BorderSide.none,
             ),
           ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Email is required";
-            }
-            if (!value.contains("@")) {
-              return "Enter a valid email";
-            }
-            return null;
-          },
         ),
       ),
     );
