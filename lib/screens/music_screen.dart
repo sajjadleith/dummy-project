@@ -76,7 +76,6 @@ class _MusicScreenState extends State<MusicScreen> {
     });
   }
 
-
   void resetTimer() {
     _timer?.cancel();
     setState(() {
@@ -133,26 +132,17 @@ class _MusicScreenState extends State<MusicScreen> {
                   height: MediaQuery.sizeOf(context).height,
                   decoration: BoxDecoration(
                     color: Colors.grey[100],
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                    ),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(30)),
                   ),
                   child: CustomScrollView(
                     slivers: [
                       SliverToBoxAdapter(
                         child: Center(
                           child: Container(
-                            padding: EdgeInsets.only(
-                              left: 20,
-                              top: 30,
-                              bottom: 5,
-                            ),
+                            padding: EdgeInsets.only(left: 20, top: 30, bottom: 5),
                             child: Text(
                               "Daily Meditation",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                              ),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                             ),
                           ),
                         ),
@@ -176,17 +166,10 @@ class _MusicScreenState extends State<MusicScreen> {
                       SliverToBoxAdapter(
                         child: Center(
                           child: Container(
-                            padding: EdgeInsets.only(
-                              left: 10,
-                              top: 20,
-                              bottom: 5,
-                            ),
+                            padding: EdgeInsets.only(left: 10, top: 20, bottom: 5),
                             child: Text(
                               "River Sound",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                              ),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                             ),
                           ),
                         ),
@@ -200,9 +183,7 @@ class _MusicScreenState extends State<MusicScreen> {
                             Container(
                               padding: EdgeInsets.only(left: 50),
                               child: Material(
-                                shape: CircleBorder(
-                                  side: BorderSide(color: Colors.black),
-                                ),
+                                shape: CircleBorder(side: BorderSide(color: Colors.black)),
                                 color: Colors.white,
                                 child: InkWell(
                                   onTap: () {
@@ -247,9 +228,7 @@ class _MusicScreenState extends State<MusicScreen> {
                             Container(
                               padding: EdgeInsets.only(right: 50),
                               child: Material(
-                                shape: CircleBorder(
-                                  side: BorderSide(color: Colors.black),
-                                ),
+                                shape: CircleBorder(side: BorderSide(color: Colors.black)),
                                 color: Colors.white,
                                 child: InkWell(
                                   onTap: () {},
@@ -286,12 +265,9 @@ class _MusicScreenState extends State<MusicScreen> {
                               },
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0,
-                              ),
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(formatTime(currentValue.toInt())),
                                   Text(formatTime(300)),
@@ -304,40 +280,31 @@ class _MusicScreenState extends State<MusicScreen> {
 
                       SliverToBoxAdapter(
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 30,
-                            right: 30,
-                            top: 30,
-                          ),
+                          padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 "Rekomendasi",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                               ),
-                              Text(
-                                "Lihat Lebih",
-                                style: TextStyle(color: Colors.blueAccent),
-                              ),
+                              Text("Lihat Lebih", style: TextStyle(color: Colors.blueAccent)),
                             ],
                           ),
                         ),
                       ),
                       SliverList.separated(
-                        itemBuilder: (context,index)=>                      SizedBox(
+                        itemBuilder: (context, index) => SizedBox(
                           child: CustomCart(
                             title: 'Meditasi Dasar 2',
                             desc: '2 Menit . Singkart',
                             img: '${AppConstain.imgs[0]}',
                             onTap: () {},
+                            onChange: () {},
                           ),
                         ),
-                        separatorBuilder: (context,index)=>const SizedBox(height: 30,),
+                        separatorBuilder: (context, index) => const SizedBox(height: 30),
                       ),
                     ],
                   ),

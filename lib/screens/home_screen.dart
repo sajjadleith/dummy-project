@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:music_app/core/widgets/sperated-list.dart';
 import 'package:music_app/models/product_api_model.dart';
 import 'package:music_app/screens/music_screen.dart';
+import 'package:music_app/screens/product_details_screen.dart';
 import '../core/app-constain.dart';
 import '../core/widgets/custom-card.dart';
 import 'package:http/http.dart' as http;
@@ -111,6 +112,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                     desc: data.description,
                                     img: data.image,
                                     onTap: () => onTap,
+                                    onChange: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProductDetailsScreen(id: snapshot.data![index].id),
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
                                 separatorBuilder: (context, index) => SizedBox(height: 10),

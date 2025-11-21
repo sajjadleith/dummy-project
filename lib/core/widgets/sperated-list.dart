@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:music_app/models/product_api_model.dart';
+import 'package:music_app/screens/product_details_screen.dart';
 
 import '../app-constain.dart';
 
