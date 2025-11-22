@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/api_app/dummy_for_api_screen.dart';
+import 'package:music_app/controllers/update_provider.dart';
 import 'package:music_app/core/routes/app_routes.dart';
 import 'package:music_app/core/routes/generated_route.dart';
 import 'package:music_app/screens/chat_screen.dart';
@@ -9,6 +10,7 @@ import 'package:music_app/screens/login_screen.dart';
 import 'package:music_app/screens/onbording_screen.dart';
 import 'package:music_app/screens/profile_screen.dart';
 import 'package:music_app/screens/register_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,26 +35,29 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Music App',
-      theme: ThemeData(
-        fontFamily: "Tajawal",
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => UpdateProvider())],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Music App',
+        theme: ThemeData(
+          fontFamily: "Tajawal",
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
+        // home: Scaffold(
+        //   backgroundColor: Colors.grey[100],
+        //   body: screens[currentIndex],
+        //   bottomNavigationBar: CustomNavbar(
+        //     currentIndex: currentIndex,
+        //     onChange: onChange,
+        //   ),
+        // ),
+        home: HomeScreen(),
+        // initialRoute: AppRoutes.defaultRoute,
+        // // routes: routeProvider,
+        // onGenerateRoute: AppRouteGenerator.generateRoute,
+        // home: LoginScreen(),
       ),
-      // home: Scaffold(
-      //   backgroundColor: Colors.grey[100],
-      //   body: screens[currentIndex],
-      //   bottomNavigationBar: CustomNavbar(
-      //     currentIndex: currentIndex,
-      //     onChange: onChange,
-      //   ),
-      // ),
-      home: HomeScreen(),
-      // initialRoute: AppRoutes.defaultRoute,
-      // // routes: routeProvider,
-      // onGenerateRoute: AppRouteGenerator.generateRoute,
-      // home: LoginScreen(),
     );
   }
 }

@@ -20,13 +20,15 @@ class ProductApiModel {
   });
   factory ProductApiModel.fromJson(Map<String, dynamic> json) {
     return ProductApiModel(
-      id: json['id'],
-      title: json['title'],
-      price: (json['price'] as num).toDouble(),
-      description: json['description'],
-      category: json['category'],
-      image: json['image'],
-      rating: RateApiModel.fromJson(json['rating']),
+      id: json['id'] ?? 0,
+      title: json['title'] ?? "",
+      price: (json['price'] ?? 0).toDouble(),
+      description: json['description'] ?? "",
+      category: json['category'] ?? "",
+      image: json['image'] ?? "",
+      rating: json['rating'] != null
+          ? RateApiModel.fromJson(json['rating'])
+          : RateApiModel(rate: 0.0, count: 0),
     );
   }
 }
