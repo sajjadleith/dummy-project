@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:music_app/api_app/dummy_for_api_screen.dart';
+import 'package:music_app/controllers/product_provider.dart';
 import 'package:music_app/controllers/update_provider.dart';
-import 'package:music_app/core/routes/app_routes.dart';
-import 'package:music_app/core/routes/generated_route.dart';
 import 'package:music_app/screens/chat_screen.dart';
 import 'package:music_app/screens/dummy_screen.dart';
 import 'package:music_app/screens/home_screen.dart';
-import 'package:music_app/screens/login_screen.dart';
-import 'package:music_app/screens/onbording_screen.dart';
 import 'package:music_app/screens/profile_screen.dart';
-import 'package:music_app/screens/register_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,7 +20,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  List<Widget> screens = [HomeScreen(), DummyScreen(), ChatScreen(), ProfileScreen()];
+  List<Widget> screens = [
+    HomeScreen(),
+    DummyScreen(),
+    ChatScreen(),
+    ProfileScreen(),
+  ];
   int currentIndex = 0;
   onChange(int index) {
     setState(() {
@@ -36,7 +36,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => UpdateProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (context) => UpdateProvider()),
+        ChangeNotifierProvider(create: (context) => ProductProvider()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Music App',
