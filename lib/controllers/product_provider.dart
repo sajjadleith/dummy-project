@@ -36,4 +36,10 @@ class ProductProvider extends ChangeNotifier {
     filteredProduct = List.from(allProduct);
     notifyListeners();
   }
+
+  void removeProduct(int id) {
+    allProduct.removeWhere((p) => p.id == id);
+    filteredProduct.removeWhere((p) => p.id == id);
+    notifyListeners();
+  }
 }

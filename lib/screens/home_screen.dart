@@ -5,8 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:music_app/controllers/product_provider.dart';
 import 'package:music_app/core/widgets/sperated-list.dart';
 import 'package:music_app/models/product_api_model.dart';
+import 'package:music_app/screens/product_details_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../controllers/update_provider.dart';
 import '../core/app-constain.dart';
 import '../core/widgets/custom-card.dart';
 import 'music_screen.dart';
@@ -144,8 +146,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                   title: data.title,
                                   desc: data.description,
                                   img: data.image,
-                                  onTap: () {},
-                                  onChange: () {},
+                                  onTap: () async {
+                                    final upd = Provider.of<UpdateProvider>(
+                                      context,
+                                      listen: false,
+                                    );
+                                    await upd.deleteProduct(data.id);
+
+                                    // Remove from provider also
+                                    prov.removeProduct(data.id);
+                                  },
+                                  onChange: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProductDetailsScreen(id: data.id),
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                               separatorBuilder: (_, __) => SizedBox(height: 10),
