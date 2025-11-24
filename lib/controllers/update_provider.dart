@@ -7,9 +7,13 @@ import 'package:music_app/models/product_api_model.dart';
 class UpdateProvider extends ChangeNotifier {
   ProductApiModel? product;
   Future<void> updateTitle(int id, String newTitle) async {
-    final url = Uri.parse("https://fakestoreapi.com/products/${id}");
+    final url = Uri.parse("https://fakestoreapi.com/products/$id");
     final data = jsonEncode({"title": newTitle});
-    final response = await http.put(url, headers: {"Content-Type": "application/json"}, body: data);
+    final response = await http.put(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: data,
+    );
     if (response.statusCode == 200 || response.statusCode == 201) {
       final jsonData = jsonDecode(response.body);
       final updatedTitle = ProductApiModel.fromJson(jsonData);
@@ -19,5 +23,22 @@ class UpdateProvider extends ChangeNotifier {
       throw Exception("Failed to get data ${response.statusCode}");
     }
     print(response.body);
+  }
+
+  Future<bool> deleteProduct(int id) async {
+    final url = Uri.parse("https://fakestoreapi.com/products/$id");
+    final response = await http.delete(
+      url,
+      headers: {"Content-Type": "application/json"},
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      print("Product delete successfully");
+      print(response.body);
+      notifyListeners();
+      return true;
+    } else {
+      print("Failed to delete product: ${response.statusCode}");
+      return false;
+    }
   }
 }

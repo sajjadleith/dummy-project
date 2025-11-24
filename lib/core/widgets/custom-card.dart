@@ -16,7 +16,7 @@ class CustomCart extends StatelessWidget {
   final String title;
   final String desc;
   final String img;
-  final Function onTap;
+  final VoidCallback onTap;
   final VoidCallback onChange;
 
   @override
@@ -37,7 +37,9 @@ class CustomCart extends StatelessWidget {
                   height: 100,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    boxShadow: [BoxShadow(color: Colors.grey.shade200, spreadRadius: 1)],
+                    boxShadow: [
+                      BoxShadow(color: Colors.grey.shade200, spreadRadius: 1),
+                    ],
                   ),
                 ),
                 Container(
@@ -45,7 +47,10 @@ class CustomCart extends StatelessWidget {
                   height: 100,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(image: NetworkImage(img), fit: BoxFit.cover),
+                    image: DecorationImage(
+                      image: NetworkImage(img),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Positioned(
@@ -69,7 +74,11 @@ class CustomCart extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                            padding: const EdgeInsets.only(
+                              top: 20,
+                              left: 10,
+                              right: 10,
+                            ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +89,10 @@ class CustomCart extends StatelessWidget {
                                     title,
                                     // maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                                 Text(
@@ -97,14 +109,17 @@ class CustomCart extends StatelessWidget {
                           shape: CircleBorder(),
                           color: Colors.purple[900],
                           child: InkWell(
-                            onTap: onTap(),
+                            onTap: onTap,
                             customBorder: CircleBorder(),
                             child: Padding(
                               padding: EdgeInsets.all(17),
                               child: SvgPicture.asset(
                                 AppConstain.play,
                                 height: 15,
-                                colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
                               ),
                             ),
                           ),
