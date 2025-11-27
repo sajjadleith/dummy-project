@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 class AddTaskForm extends StatefulWidget {
   final Function(TaskModel) onAdd;
   final TaskModel? existingTask;
-  AddTaskForm({super.key, required this.onAdd, this.existingTask});
+  const AddTaskForm({super.key, required this.onAdd, this.existingTask});
 
   @override
   _AddTaskFormState createState() => _AddTaskFormState();

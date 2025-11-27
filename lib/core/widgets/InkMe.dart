@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class InkMe extends StatefulWidget {
-  InkMe({
+  const InkMe({
     super.key,
     required this.child,
     this.onTap,
@@ -25,17 +25,17 @@ class _InkMeState extends State<InkMe> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        this.widget.child,
+        widget.child,
         Positioned.fill(
           child: Padding(
-            padding: EdgeInsets.all(this.widget.padding ?? 0),
+            padding: EdgeInsets.all(widget.padding ?? 0),
             child: Material(
               color: Colors.transparent,
               child: InkWell(
                 borderRadius:
-                this.widget.radius ?? BorderRadius.circular(50),
-                splashColor: this.widget.overlayColor,
-                onTap: this.widget.onTap,
+                widget.radius ?? BorderRadius.circular(50),
+                splashColor: widget.overlayColor,
+                onTap: widget.onTap,
               ),
             ),
           ),

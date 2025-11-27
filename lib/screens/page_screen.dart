@@ -3,7 +3,7 @@ import 'package:music_app/core/routes/app_routes.dart';
 import 'package:music_app/core/widgets/custome_textfiel.dart';
 
 class PageScreen extends StatefulWidget {
-  PageScreen({Key? key}) : super(key: key);
+  const PageScreen({super.key});
 
   @override
   _PageScreenState createState() => _PageScreenState();

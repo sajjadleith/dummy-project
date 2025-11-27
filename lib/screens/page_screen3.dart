@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:music_app/core/app-constain.dart';
 import 'package:music_app/core/routes/app_routes.dart';
-import 'package:music_app/core/routes/route_provider.dart';
 
 class PageScreen3 extends StatefulWidget {
   final Map<String, dynamic>? info;

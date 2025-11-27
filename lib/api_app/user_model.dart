@@ -1,6 +1,5 @@
 import 'package:music_app/api_app/address_model.dart';
 import 'package:music_app/api_app/company_model.dart';
-import 'package:music_app/api_app/geo_model.dart';
 
 class UserModel {
   final int id;

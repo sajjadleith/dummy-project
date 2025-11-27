@@ -4,7 +4,7 @@ import 'package:music_app/screens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DummyScreen2 extends StatefulWidget {
-  DummyScreen2({Key? key}) : super(key: key);
+  const DummyScreen2({super.key});
 
   @override
   _DummyScreen2State createState() => _DummyScreen2State();

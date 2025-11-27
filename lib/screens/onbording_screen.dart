@@ -5,7 +5,7 @@ import 'package:music_app/models/gros_model.dart';
 import 'package:music_app/screens/login_screen.dart';
 
 class OnbordingScreen extends StatefulWidget {
-  OnbordingScreen({Key? key}) : super(key: key);
+  const OnbordingScreen({super.key});
 
   @override
   _OnbordingScreenState createState() => _OnbordingScreenState();
@@ -56,8 +56,8 @@ class _OnbordingScreenState extends State<OnbordingScreen> {
         children: [
           Stack(
             children: [
-              Container(width: width, height: height),
-              Container(
+              SizedBox(width: width, height: height),
+              SizedBox(
                 width: width,
                 height: 600,
                 child: SvgPicture.asset(

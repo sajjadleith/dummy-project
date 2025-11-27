@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:music_app/core/routes/app_routes.dart';
 import 'package:music_app/screens/page_screen.dart';
 import 'package:music_app/screens/page_screen2.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../app-constain.dart';
 
 class InfoWidget extends StatelessWidget {
   const InfoWidget({super.key, required this.ico, required this.title, required this.desc});

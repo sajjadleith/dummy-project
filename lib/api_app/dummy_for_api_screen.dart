@@ -6,7 +6,7 @@ import 'package:music_app/api_app/user_model.dart';
 import "package:http/http.dart" as http;
 
 class DummyForApiScreen extends StatefulWidget {
-  DummyForApiScreen({Key? key}) : super(key: key);
+  const DummyForApiScreen({super.key});
 
   @override
   _DummyForApiScreenState createState() => _DummyForApiScreenState();

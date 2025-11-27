@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:music_app/core/app-constain.dart';
-import 'package:music_app/screens/dummy_screen.dart';
-import 'package:music_app/screens/home_screen.dart';
 
 import 'navbar_icon_widget.dart';
 

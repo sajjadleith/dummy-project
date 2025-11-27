@@ -5,7 +5,7 @@ import 'package:music_app/core/widgets/add_task_form.dart';
 import 'package:music_app/models/task_model.dart';
 
 class ActiveTasksScreen extends StatefulWidget {
-  ActiveTasksScreen({Key? key}) : super(key: key);
+  const ActiveTasksScreen({super.key});
 
   @override
   _ActiveTasksScreenState createState() => _ActiveTasksScreenState();

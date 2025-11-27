@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../app-constain.dart';
 
 class CustomeCard extends StatelessWidget {
   const CustomeCard({super.key, required this.ico, required this.text});
